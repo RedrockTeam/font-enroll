@@ -100,12 +100,10 @@ $('.sure').addEventListener('touchstart',() => {
     ajax({
         method: 'post',
         url: '/ActivityPlatform/public/wx/enroll',
-        data: {
-            act_key: [1000],
-            contact: phone
-        },
+        type: 'form',
+        data: 'act_key='+ [1000] + '&contact=' + phone,
         success: function(res) {
-            console.log(res)
+            window.alert(res.message);
         }
 
     })
