@@ -1,5 +1,7 @@
+"use strict";
+
 function $(ele) {
-    if(document.querySelectorAll(ele).length === 1) {
+    if (document.querySelectorAll(ele).length === 1) {
         return document.querySelector(ele);
     } else {
         return document.querySelectorAll(ele);
@@ -19,7 +21,7 @@ function ajax(conf) {
     if (method == 'GET' || method == 'get') {
         xhr.send(null);
     } else if (method == 'POST' || method == 'post') {
-        if(type === 'json' || type === 'JSON') {
+        if (type === 'json' || type === 'JSON') {
             xhr.setRequestHeader('content-type', 'application/json');
             xhr.send(JSON.stringify(data));
         } else if (type === 'form' || type === 'FORM') {
@@ -31,9 +33,8 @@ function ajax(conf) {
         //console.log(xhr.status)
         if (xhr.readyState == 4 && successInfo.test(xhr.status)) {
             success(JSON.parse(xhr.responseText));
-        } else if(errorInfo.test(xhr.status)) {
+        } else if (errorInfo.test(xhr.status)) {
             window.alert('出错啦TnT');
         }
     };
-    
 };
