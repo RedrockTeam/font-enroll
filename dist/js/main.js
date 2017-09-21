@@ -13,6 +13,7 @@ function ajax(conf) {
     var url = conf.url;
     var success = conf.success;
     var type = conf.type;
+    var error = conf.error;
     var data = conf.data;
     var xhr = new XMLHttpRequest();
     var successInfo = new RegExp("2[0-9]{2}");
@@ -33,8 +34,10 @@ function ajax(conf) {
         //console.log(xhr.status)
         if (xhr.readyState == 4 && successInfo.test(xhr.status)) {
             success(JSON.parse(xhr.responseText));
-        } else if (errorInfo.test(xhr.status)) {
-            window.alert('出错啦TnT');
+        } else if (xhr.readyState == 4 && errorInfo.test(xhr.status)) {
+            if (error !== undefined) {
+                error(JSON.parse(xhr.responseText));
+            }
         }
     };
 };

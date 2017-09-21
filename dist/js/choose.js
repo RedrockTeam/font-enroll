@@ -1,5 +1,9 @@
 'use strict';
 
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
+var serverUrl = '/activity';
+//'http://hongyan.cqupt.edu.cn/activity';
 var closeHeight = '1.06666667rem',
     oneRank = 2,
     twoRank = 102,
@@ -9,14 +13,14 @@ var closeHeight = '1.06666667rem',
     nowData = [],
     postInfo = true,
     data = {};
-//console.log(window.getComputedStyle($('.select-sure')[0]).height)
+
 //data = [[[{id: 1024,name:'web'},{id:111,name:'移动'},{id:2323,name:'视觉'}],[{id:123,name:'香梨'},{id:23,name:'红富士'}]]];
 ajax({
     method: 'get',
-    url: 'http://hongyan.cqupt.edu.cn/activity/wx/userInfo',
+    url: serverUrl + '/wx/userInfo',
     success: function success(res) {
         data = res.data.act_info;
-        //console.log(res.data.act_info)
+        console.log(data);
     }
 });
 $('.content-choose').addEventListener('touchend', function (e) {
@@ -41,7 +45,7 @@ $('.content-choose').addEventListener('touchend', function (e) {
             }
         } else {
             target.parentElement.style.height = parseFloat(closeHeight) * (target.nextElementSibling.children.length + 1) + 'rem';
-            console.log(target.nextElementSibling.children.length + 1);
+            //console.log(target.nextElementSibling.children.length + 1)
             target.style.backgroundColor = '#ffbb77';
             target.parentElement.classList.add('add-height');
             target.querySelector('i').classList.remove('icon-xiala');
@@ -66,7 +70,7 @@ $('.content-choose').addEventListener('touchend', function (e) {
         if (target.getAttribute('activity_id') !== null) {
             department.push(parseInt(target.getAttribute('activity_id')));
         }
-        console.log(department);
+        //console.log(department)
         beforeOpen.classList.remove('add-height');
         beforeOpen.style.height = closeHeight;
         beforeOpen.children[0].style.backgroundColor = '#fffcf0';
@@ -104,11 +108,22 @@ $('.sure').addEventListener('touchstart', function () {
         postInfo = false;
         ajax({
             method: 'post',
-            url: 'http://hongyan.cqupt.edu.cn/activity/wx/enroll',
+            url: serverUrl + '/wx/enroll',
             type: 'form',
             data: 'act_key=' + department + '&contact=' + phone,
             success: function success(res) {
                 window.alert(res.message);
+                postInfo = true;
+            },
+            error: function error(res) {
+                if (_typeof(res.message) === "object") {
+                    for (var mes in res.message) {
+                        window.alert(mes + res.message[mes]);
+                    }
+                } else {
+                    window.alert('操作不对哦~');
+                }
+
                 postInfo = true;
             }
         });
