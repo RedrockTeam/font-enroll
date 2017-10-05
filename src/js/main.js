@@ -1,9 +1,6 @@
 function $(ele) {
-    if(document.querySelectorAll(ele).length === 1) {
-        return document.querySelector(ele);
-    } else {
-        return document.querySelectorAll(ele);
-    }
+    const eles = document.querySelectorAll(ele);
+    return eles.length === 1 ? eles[0] : eles;
 }
 
 function ajax(conf) {

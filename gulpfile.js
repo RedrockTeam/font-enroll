@@ -142,6 +142,8 @@ gulp.task('watch', function () {
 
 gulp.task('init-project', ['less-task', 'css-task', 'babel', 'html', 'img-min']);
 
+gulp.task('default', ['browser-sync'])
+
 /*
  *   @params
  *       babel 转码 es6 => es5

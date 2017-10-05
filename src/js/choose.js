@@ -1,5 +1,6 @@
-let serverUrl = '/activity';
-//'http://hongyan.cqupt.edu.cn/activity';
+// let serverUrl = '/activity';
+let serverUrl = 'http://wx.idsbllp.cn/activity';
+// 'http://hongyan.cqupt.edu.cn/activity';
 let closeHeight = '1.06666667rem',
     oneRank = 2,
     twoRank = 102,

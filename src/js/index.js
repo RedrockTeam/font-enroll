@@ -1,4 +1,5 @@
-let serverUrl = '/activity/wx/choose';
+let serverUrl = '/html/department.html';
+// let serverUrl = '/activity/wx/choose';
 // './choose.html'
 $('.button').addEventListener('touchstart',() => {
     if($('.input-content').value.length !== 11) {
